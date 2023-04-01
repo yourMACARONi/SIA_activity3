@@ -1,19 +1,13 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
+    use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User;
+    class User extends Model{
+        protected $table = 'site1';
+        protected $fillable = [
+            'username','password'
+        ];
 
-use Illuminate\Database\Eloquent\Model;
-
-
-class User extends Model {
-
-    public $timestamps = false;
-
-    protected $table = 'site1';
-
-    protected $fillable = [
-        'username', 'password'
-    ];
-}
+        public $timestamps = false;
+    }

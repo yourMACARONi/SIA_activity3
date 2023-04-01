@@ -1,48 +1,32 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class userController extends Controller {
+Class UserController extends Controller {
     private $request;
-    public $timestamps = false;
-
-     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-     public function __construct(Request $request) {
-        $this->request= $request;
-     }
-
-     public function showUsers() {
-        return response()->json(User::all());
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+    public function getUsers()
+    {
+        $users = User::all();
+        return response()->json(['data' => $users], 200);
     }
 
-
-    public function showUser($id) {
-        $user = User::findOrFail($id);
-
-        return response()->json($user);
-
-    }
-
-    public function addUser(Request $request){
+    public function add(Request $request){
+        
         $rules = [
-            'username' => 'required | max:20',
-            'password' => 'required | max:20'
+            'username' => 'required|max:20',
+            'password' => 'required|max:20',
         ];
 
-        $this->validate($request, $rules);
+        $this->validate($request,$rules);
 
         $user = User::create($request->all());
-
-        return response()->json($user, 201);
-    }
-    
+        return response()->json($user, 200);
+ }
 }
+
